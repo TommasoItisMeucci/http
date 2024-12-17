@@ -67,7 +67,7 @@ public class Main {
     }
 
     private static String getContentType(File f){
-        String[] s = f.getName().split("//.");
+        String[] s = f.getName().split("\\.");
         String ext = s[s.length - 1];
         switch (ext) {
             case "html":
