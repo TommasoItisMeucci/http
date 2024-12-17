@@ -35,6 +35,10 @@ public class Main {
             } while (!header.isEmpty());
             System.out.println("richiesta terminata");
 
+            if (resource.equals("/")) {
+                resource = "/index.html";
+            }
+            
             File file = new File("htdocs" + resource);            
             if (file.exists()) {
                 
@@ -42,9 +46,10 @@ public class Main {
                 out.writeBytes("Content-Type: " + getContentType(file) + "\n");
                 out.writeBytes("Content-Length: " + file.length() + " \n");
                 out.writeBytes("\n");
-                byte[] buf = new byte[8192];
-                int n;
+                
                 InputStream input = new FileInputStream(file);
+                byte[] buf = new byte[8192];
+                int n; 
                 while ((n = input.read(buf)) != -1) {
                     out.write(buf, 0, n);
                 }
@@ -72,6 +77,7 @@ public class Main {
         switch (ext) {
             case "html":
             case "htm":
+
                 return "text/html";
             
             case "png":
